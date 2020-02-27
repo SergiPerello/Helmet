@@ -8,8 +8,8 @@ public class Player {
     private int yInitial = 50;
     private int x, y;
     private int xa = 0;
-    private int width = 30;
-    private int height = 50;
+    private int width = 100;
+    private int height = 180;
     private Main game;
 
 
@@ -20,9 +20,12 @@ public class Player {
 
     public void move() {
         game.showText(false);
-        if (x + xa > 0 && x + xa < game.getWidth() - width)
+        if (x + xa >= 0 && x + xa < game.getWidth() - width )
             x = x + xa;
-        else if (collisionFinalDoor()) {
+        else if (x + xa >= game.getWidth() - width && !game.finalDoor.doorIsClose){
+            x = x + xa;
+        }
+        if (collisionFinalDoor()) {
             if (game.finalDoor.doorIsClose) {
                 game.showText(true);
             }
@@ -31,7 +34,6 @@ public class Player {
                 setInitialPosition();
             }
         }
-
         xa = 0;
     }
 

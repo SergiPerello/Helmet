@@ -7,8 +7,8 @@ import java.util.TimerTask;
 public class FinalDoor {
     private int x = 0;
     private int y = 0;
-    private int width = 30;
-    private int height = 50;
+    private int width = 100;
+    private int height = 180;
     private Color color = Color.green;
     boolean doorIsClose = false;
     private Main game;
