@@ -6,8 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Main extends JPanel {
-    private Player player = new Player(this);
+    Player player = new Player(this);
     FinalDoor finalDoor = new FinalDoor(this);
+    FallingObject fallingObject = new FallingObject(this);
+
     private static JLabel label = new JLabel("La porta esta tancada");
 
     public Main() {
@@ -41,11 +43,11 @@ public class Main extends JPanel {
             game.repaint();
             Thread.sleep(4);
         }
-
     }
 
     private void move() {
         player.move();
+        fallingObject.move();
     }
 
     @Override
@@ -56,6 +58,7 @@ public class Main extends JPanel {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         player.paint(g2d);
         finalDoor.paint(g2d);
+        fallingObject.paint(g2d);
     }
     public void showText(boolean bool){
         label.setVisible(bool);

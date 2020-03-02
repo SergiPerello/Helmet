@@ -32,10 +32,6 @@ public class FinalDoor {
         timer.scheduleAtFixedRate(timerTask, 0, 3000);
     }
 
-    public Color getColor() {
-        return color;
-    }
-
     public void paint(Graphics2D g) {
         x = game.getWidth() - width;
         y = game.getHeight() - height;

@@ -40,8 +40,6 @@ public class Player {
     public void paint(Graphics2D g) {
         y = game.getHeight() - height;
         g.fillRect(x, y, width, height);
-
-
     }
 
     public void keyPressed(KeyEvent e) {
@@ -57,10 +55,6 @@ public class Player {
 
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
-    }
-
-    public int getLeftX() {
-        return x;
     }
 
     public void setInitialPosition() {

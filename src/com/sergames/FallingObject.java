@@ -3,15 +3,24 @@ package com.sergames;
 import java.awt.*;
 
 public class FallingObject {
-    private int x = 0;
-    private int y = 0;
+    private int xInitial = Const.WIDTH/2;
+    private int yInitial;
+    private int x, y;
+    private int ya = 1;
     private int width = 100;
-    private int height = 180;
-    private Color color = Color.green;
+    private int height = 100;
+    private Color color;
     private Main game;
 
     public FallingObject(Main game) {
         this.game = game;
+        this.color = Color.yellow;
+    }
+
+    public void move() {
+        if (x >= 0 && x < game.getWidth() - width) {
+            y = y + ya;
+        }
     }
 
     public Color getColor() {
@@ -19,8 +28,6 @@ public class FallingObject {
     }
 
     public void paint(Graphics2D g) {
-        x = game.getWidth() - width;
-        y = game.getHeight() - height;
         g.setColor(color);
         g.fillRect(x, y, width, height);
     }
