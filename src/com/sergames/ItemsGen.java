@@ -14,8 +14,9 @@ public class ItemsGen {
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
     }
+
     void addHammerItem() {
-        game.fallingObjects.add(new Item_Hammer(game,getRandom(positions),"/img/fallingObject-hammer.png"));
+        game.fallingObjects.add(new Item_Hammer(game, getRandom(positions), "/img/fallingObject-hammer.png"));
     }
 
     void deleteCollisionItems() {

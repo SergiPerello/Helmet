@@ -48,6 +48,7 @@ public class FallingObject {
     public void paint(Graphics2D g) {
         g.setColor(color);
         g.fillRect(x, y, width, height);
+        g.drawImage(imageIcon.getImage(), x, y, width, height, null);
     }
 
     private void collisionPlayer() {
