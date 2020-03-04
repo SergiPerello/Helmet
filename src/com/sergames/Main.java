@@ -4,16 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.sergames.Const.timeBetweenItems;
 
 public class Main extends JPanel {
+    private static JLabel label = new JLabel("La porta esta tancada");
     Player player = new Player(this);
     FinalDoor finalDoor = new FinalDoor(this);
-    FallingObject fallingObject = new FallingObject(this);
-
-    private static JLabel label = new JLabel("La porta esta tancada");
+    ItemsGen itemsGen = new ItemsGen(this);
+    ArrayList<FallingObject> fallingObjects = new ArrayList<>();
 
     public Main() {
         addKeyListener(new KeyListener() {
+
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -28,6 +34,14 @@ public class Main extends JPanel {
             }
         });
         setFocusable(true);
+        Timer timer = new Timer("MyTimer");
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                itemsGen.addHammerItem();
+            }
+        };
+        timer.scheduleAtFixedRate(timerTask, 0, timeBetweenItems);
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -41,26 +55,28 @@ public class Main extends JPanel {
         while (true) {
             game.move();
             game.repaint();
-            Thread.sleep(4);
+            Thread.sleep(6);
         }
     }
 
     private void move() {
         player.move();
-        fallingObject.move();
+        fallingObjects.removeIf(fallingObject -> fallingObject.getY() > Const.HEIGHT);
+        fallingObjects.forEach(FallingObject::move);
+        itemsGen.deleteCollisionItems();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         player.paint(g2d);
         finalDoor.paint(g2d);
-        fallingObject.paint(g2d);
+        fallingObjects.forEach((x) -> x.paint(g2d));
     }
-    public void showText(boolean bool){
+
+    public void showText(boolean bool) {
         label.setVisible(bool);
     }
 

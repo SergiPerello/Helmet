@@ -20,16 +20,15 @@ public class Player {
 
     public void move() {
         game.showText(false);
-        if (x + xa >= 0 && x + xa < game.getWidth() - width )
+        if (x + xa >= 0 && x + xa < game.getWidth() - width)
             x = x + xa;
-        else if (x + xa >= game.getWidth() - width && !game.finalDoor.doorIsClose){
+        else if (x + xa >= game.getWidth() - width && !game.finalDoor.doorIsClose) {
             x = x + xa;
         }
         if (collisionFinalDoor()) {
             if (game.finalDoor.doorIsClose) {
                 game.showText(true);
-            }
-            else {
+            } else {
                 game.showText(false);
                 setInitialPosition();
             }
