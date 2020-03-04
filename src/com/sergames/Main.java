@@ -66,6 +66,11 @@ public class Main extends JPanel {
         itemsGen.deleteCollisionItems();
     }
 
+    public void gameOver() {
+        JOptionPane.showMessageDialog(this, "Your score is: " /*getScore();*/, "Game Over", JOptionPane.ERROR_MESSAGE);
+        System.exit(ABORT);
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);

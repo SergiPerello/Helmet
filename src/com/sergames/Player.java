@@ -3,6 +3,8 @@ package com.sergames;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import static com.sergames.Const.PLAYER_HEALTH;
+
 public class Player {
     private int xInitial = 0;
     private int yInitial = 50;
@@ -10,6 +12,7 @@ public class Player {
     private int xa = 0;
     private int width = 100;
     private int height = 180;
+    private int health = PLAYER_HEALTH;
     private Main game;
 
 
@@ -59,5 +62,10 @@ public class Player {
     public void setInitialPosition() {
         x = xInitial;
         y = yInitial;
+    }
+
+    public void injure(int dmg) {
+        this.health -= dmg;
+        if (health < 0) game.gameOver(); //DEATH IS LIKE WIND, ALWAYS BY MY SIDE
     }
 }

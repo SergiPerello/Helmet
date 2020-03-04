@@ -3,14 +3,14 @@ package com.sergames;
 import javax.swing.*;
 import java.awt.*;
 
-public class FallingObject {
+public abstract class FallingObject {
     ImageIcon imageIcon;
     private int x, y;
     private int ya = 1;
     private int width = 80;
     private int height = 80;
     private Color color;
-    private Main game;
+    public Main game;
     private boolean collisionPlayer;
 
     public FallingObject(Main game, int xPosition, String img) {
@@ -24,25 +24,15 @@ public class FallingObject {
         return collisionPlayer;
     }
 
-    public int getX() {
-        return x;
-    }
-
     public int getY() {
         return y;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public void move() {
         if (x >= 0 && x < game.getWidth() - width) y = y + ya;
         collisionPlayer();
+        if (collisionPlayer) action();
+
     }
 
     public void paint(Graphics2D g) {
@@ -58,4 +48,6 @@ public class FallingObject {
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
+
+    abstract void action();
 }

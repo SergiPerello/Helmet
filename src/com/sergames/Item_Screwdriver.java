@@ -8,7 +8,7 @@ public class Item_Screwdriver extends FallingObject {
     }
 
     @Override
-    public void paint(Graphics2D g) {
-        super.paint(g);
+    void action() {
+
     }
 }
