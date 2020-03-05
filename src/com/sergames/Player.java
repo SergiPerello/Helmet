@@ -2,8 +2,12 @@ package com.sergames;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static com.sergames.Const.PLAYER_HEALTH;
+import static com.sergames.Const.PLAYER_CONFUSE_TIME;
 
 public class Player {
     private int xInitial = 0;
@@ -13,8 +17,9 @@ public class Player {
     private int width = 100;
     private int height = 180;
     private int health = PLAYER_HEALTH;
+    private boolean confused = false;
+    ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
     private Main game;
-
 
     public Player(Main game) {
         this.game = game;
@@ -45,10 +50,17 @@ public class Player {
     }
 
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            xa = -width;
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            xa = width;
+        if (confused) {
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+                xa = -width;
+            if (e.getKeyCode() == KeyEvent.VK_LEFT)
+                xa = width;
+        } else {
+            if (e.getKeyCode() == KeyEvent.VK_LEFT)
+                xa = -width;
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+                xa = width;
+        }
     }
 
     private boolean collisionFinalDoor() {
@@ -67,5 +79,10 @@ public class Player {
     public void injure(int dmg) {
         this.health -= dmg;
         if (health < 0) game.gameOver(); //DEATH IS LIKE WIND, ALWAYS BY MY SIDE
+    }
+    Runnable clear = () -> confused = false;
+    public void confuse() {
+        ses.schedule(clear, PLAYER_CONFUSE_TIME, TimeUnit.SECONDS);
+        confused = true;
     }
 }

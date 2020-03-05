@@ -15,11 +15,13 @@ public class ItemsGen {
         return array[rnd];
     }
 
-    void addHammerItem() {
-        game.fallingObjects.add(new Item_Hammer(game, getRandom(positions), "/img/fallingObject-hammer.png"));
+    void addItem() {
+        game.fallingObjects.add(new Item_Screwdriver(game, getRandom(positions), "/img/fallingObject-hammer.png"));
     }
 
     void deleteCollisionItems() {
-        game.fallingObjects.removeIf(fallingObject -> fallingObject.isCollisionPlayer());
+        game.fallingObjects.removeIf(FallingObject::isCollisionPlayer);
     }
+
+    enum ItemType {HAMMER, SCREWDRIVER, WRENCH}
 }

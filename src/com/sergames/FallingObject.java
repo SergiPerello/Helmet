@@ -4,13 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class FallingObject {
+    public Main game;
     ImageIcon imageIcon;
     private int x, y;
     private int ya = 1;
     private int width = 80;
     private int height = 80;
     private Color color;
-    public Main game;
     private boolean collisionPlayer;
 
     public FallingObject(Main game, int xPosition, String img) {

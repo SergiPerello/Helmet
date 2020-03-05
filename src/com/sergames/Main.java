@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.sergames.Const.timeBetweenItems;
+import static com.sergames.Const.TIME_BETWEEN_ITEMS;
 
 public class Main extends JPanel {
     private static JLabel label = new JLabel("La porta esta tancada");
@@ -34,20 +34,20 @@ public class Main extends JPanel {
             }
         });
         setFocusable(true);
-        Timer timer = new Timer("MyTimer");
+        Timer timer = new Timer("TimeBetweenItems");
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                itemsGen.addHammerItem();
+                itemsGen.addItem();
             }
         };
-        timer.scheduleAtFixedRate(timerTask, 0, timeBetweenItems);
+        timer.scheduleAtFixedRate(timerTask, 0, TIME_BETWEEN_ITEMS);
     }
 
     public static void main(String[] args) throws InterruptedException {
         JFrame frame = new JFrame("Helmet");
         Main game = new Main();
-        frame.setSize(Const.WIDTH, Const.HEIGHT);
+        frame.setSize(Const.SCREEN_WIDTH, Const.HEIGHT);
         game.add(label);
         frame.add(game);
         frame.setVisible(true);
@@ -67,7 +67,8 @@ public class Main extends JPanel {
     }
 
     public void gameOver() {
-        JOptionPane.showMessageDialog(this, "Your score is: " /*getScore();*/, "Game Over", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Your score is: " /*getScore();*/,
+                "Game Over", JOptionPane.ERROR_MESSAGE);
         System.exit(ABORT);
     }
 

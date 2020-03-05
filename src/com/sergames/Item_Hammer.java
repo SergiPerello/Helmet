@@ -1,7 +1,5 @@
 package com.sergames;
 
-import java.awt.*;
-
 import static com.sergames.Const.HEAVY_ATTACK;
 
 public class Item_Hammer extends FallingObject {
