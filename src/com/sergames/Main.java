@@ -15,7 +15,7 @@ public class Main extends JPanel {
     Player player = new Player(this);
     FinalDoor finalDoor = new FinalDoor(this);
     ItemsGen itemsGen = new ItemsGen(this);
-    ArrayList<FallingObject> fallingObjects = new ArrayList<>();
+    ArrayList<Item> items = new ArrayList<>();
 
     public Main() {
         addKeyListener(new KeyListener() {
@@ -61,8 +61,8 @@ public class Main extends JPanel {
 
     private void move() {
         player.move();
-        fallingObjects.removeIf(fallingObject -> fallingObject.getY() > Const.HEIGHT);
-        fallingObjects.forEach(FallingObject::move);
+        items.removeIf(fallingObject -> fallingObject.getY() > Const.HEIGHT);
+        items.forEach(Item::move);
         itemsGen.deleteCollisionItems();
     }
 
@@ -79,7 +79,7 @@ public class Main extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         player.paint(g2d);
         finalDoor.paint(g2d);
-        fallingObjects.forEach((x) -> x.paint(g2d));
+        items.forEach((x) -> x.paint(g2d));
     }
 
     public void showText(boolean bool) {

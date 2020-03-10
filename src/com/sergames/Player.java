@@ -6,19 +6,22 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static com.sergames.Const.PLAYER_HEALTH;
-import static com.sergames.Const.PLAYER_CONFUSE_TIME;
+import static com.sergames.Const.*;
 
 public class Player {
+    ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
     private int xInitial = 0;
     private int yInitial = 50;
     private int x, y;
     private int xa = 0;
     private int width = 100;
     private int height = 180;
+    private int score = 0;
     private int health = PLAYER_HEALTH;
     private boolean confused = false;
-    ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
+    Runnable noConfuse = () -> confused = false;
+    private boolean stunned = false;
+    Runnable noStun = () -> stunned = false;
     private Main game;
 
     public Player(Main game) {
@@ -38,6 +41,7 @@ public class Player {
                 game.showText(true);
             } else {
                 game.showText(false);
+                addScore(SCORE_FINAL_DOOR);
                 setInitialPosition();
             }
         }
@@ -56,10 +60,12 @@ public class Player {
             if (e.getKeyCode() == KeyEvent.VK_LEFT)
                 xa = width;
         } else {
-            if (e.getKeyCode() == KeyEvent.VK_LEFT)
-                xa = -width;
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-                xa = width;
+            if (!stunned) {
+                if (e.getKeyCode() == KeyEvent.VK_LEFT)
+                    xa = -width;
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+                    xa = width;
+            }
         }
     }
 
@@ -80,9 +86,19 @@ public class Player {
         this.health -= dmg;
         if (health < 0) game.gameOver(); //DEATH IS LIKE WIND, ALWAYS BY MY SIDE
     }
-    Runnable clear = () -> confused = false;
+
     public void confuse() {
-        ses.schedule(clear, PLAYER_CONFUSE_TIME, TimeUnit.SECONDS);
+        ses.schedule(noConfuse, PLAYER_CONFUSE_TIME, TimeUnit.SECONDS);
         confused = true;
+
+    }
+
+    public void stun() {
+        ses.schedule(noStun, PLAYER_STUN_TIME, TimeUnit.SECONDS);
+        stunned = true;
+    }
+
+    private void addScore(int finalDoorScore) {
+
     }
 }

@@ -24,19 +24,19 @@ public class ItemsGen {
         ItemType itemType = randomItem();
         switch (itemType) {
             case HAMMER:
-                game.fallingObjects.add(new Item_Hammer(game, getRandom(positions), "/img/fallingObject-hammer.png"));
+                game.items.add(new Item_Hammer(game, getRandom(positions), "/img/fallingObject-hammer.png"));
                 break;
             case SCREWDRIVER:
-                game.fallingObjects.add(new Item_Screwdriver(game, getRandom(positions), "/img/fallingObject-screwdriver.png"));
+                game.items.add(new Item_Screwdriver(game, getRandom(positions), "/img/fallingObject-screwdriver.png"));
                 break;
             case WRENCH:
+                game.items.add(new Item_Wrench(game, getRandom(positions), "/img/fallingObject-wrench.png"));
                 break;
         }
-
     }
 
     void deleteCollisionItems() {
-        game.fallingObjects.removeIf(FallingObject::isCollisionPlayer);
+        game.items.removeIf(Item::isCollisionPlayer);
     }
 
     enum ItemType {HAMMER, SCREWDRIVER, WRENCH}

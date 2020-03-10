@@ -3,7 +3,7 @@ package com.sergames;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class FallingObject {
+public abstract class Item {
     public Main game;
     ImageIcon imageIcon;
     private int x, y;
@@ -13,7 +13,7 @@ public abstract class FallingObject {
     private Color color;
     private boolean collisionPlayer;
 
-    public FallingObject(Main game, int xPosition, String img) {
+    public Item(Main game, int xPosition, String img) {
         this.game = game;
         this.color = Color.yellow;
         this.x = xPosition;
