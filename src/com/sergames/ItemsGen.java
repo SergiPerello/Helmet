@@ -39,5 +39,9 @@ public class ItemsGen {
         game.items.removeIf(Item::isCollisionPlayer);
     }
 
+    void deleteBottomItems() {
+        game.items.removeIf(item -> item.getY() > Const.HEIGHT);
+    }
+
     enum ItemType {HAMMER, SCREWDRIVER, WRENCH}
 }

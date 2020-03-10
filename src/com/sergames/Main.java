@@ -61,8 +61,8 @@ public class Main extends JPanel {
 
     private void move() {
         player.move();
-        items.removeIf(fallingObject -> fallingObject.getY() > Const.HEIGHT);
         items.forEach(Item::move);
+        itemsGen.deleteBottomItems();
         itemsGen.deleteCollisionItems();
     }
 

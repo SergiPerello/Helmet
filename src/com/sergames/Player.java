@@ -98,7 +98,8 @@ public class Player {
         stunned = true;
     }
 
-    private void addScore(int finalDoorScore) {
-
+    private void addScore(int points) {
+        score =+ points;
     }
+
 }
