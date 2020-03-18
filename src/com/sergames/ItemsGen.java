@@ -2,6 +2,8 @@ package com.sergames;
 
 import java.util.Random;
 
+import static com.sergames.Const.SCREEN_HEIGHT;
+
 public class ItemsGen {
     int[] positions = {110, 210, 310, 410, 510, 610};
     private Main game;
@@ -40,7 +42,7 @@ public class ItemsGen {
     }
 
     void deleteBottomItems() {
-        game.items.removeIf(item -> item.getY() > Const.HEIGHT);
+        game.items.removeIf(item -> item.getY() > SCREEN_HEIGHT);
     }
 
     enum ItemType {HAMMER, SCREWDRIVER, WRENCH}

@@ -29,18 +29,18 @@ public class Player {
         setInitialPosition();
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public void move() {
-        game.showText(false);
         if (x + xa >= 0 && x + xa < game.getWidth() - width)
             x = x + xa;
         else if (x + xa >= game.getWidth() - width && !game.finalDoor.doorIsClose) {
             x = x + xa;
         }
         if (collisionFinalDoor()) {
-            if (game.finalDoor.doorIsClose) {
-                game.showText(true);
-            } else {
-                game.showText(false);
+            if (!game.finalDoor.doorIsClose) {
                 addScore(SCORE_FINAL_DOOR);
                 setInitialPosition();
             }
@@ -84,7 +84,7 @@ public class Player {
 
     public void injure(int dmg) {
         this.health -= dmg;
-        if (health < 0) game.gameOver(); //DEATH IS LIKE WIND, ALWAYS BY MY SIDE
+        if (health <= 0) game.gameOver(); //DEATH IS LIKE WIND, ALWAYS BY MY SIDE
     }
 
     public void confuse() {
@@ -99,7 +99,10 @@ public class Player {
     }
 
     private void addScore(int points) {
-        score =+ points;
+        score += points;
     }
 
+    public int getHealth() {
+        return health;
+    }
 }

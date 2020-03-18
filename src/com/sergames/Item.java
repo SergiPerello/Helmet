@@ -10,12 +10,10 @@ public abstract class Item {
     private int ya = 1;
     private int width = 80;
     private int height = 80;
-    private Color color;
     private boolean collisionPlayer;
 
     public Item(Main game, int xPosition, String img) {
         this.game = game;
-        this.color = Color.yellow;
         this.x = xPosition;
         this.imageIcon = new ImageIcon(getClass().getResource(img));
     }
@@ -36,8 +34,6 @@ public abstract class Item {
     }
 
     public void paint(Graphics2D g) {
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
         g.drawImage(imageIcon.getImage(), x, y, width, height, null);
     }
 
