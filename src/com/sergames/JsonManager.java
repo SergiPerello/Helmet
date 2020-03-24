@@ -28,7 +28,7 @@ public class JsonManager {
         if (jsonArray != null) {
             for (Object o : jsonArray) {
                 obj = (JSONObject) o;
-                entries.add(new Entry(obj.get("PLAYER").toString(), obj.get("SCORE").toString()));
+                entries.add(new Entry(obj.get("PLAYER").toString(), Integer.parseInt(obj.get("SCORE").toString())));
             }
             Comparator<Entry> compareByScore = Comparator.comparing(Entry::getScore);
             entries.sort(compareByScore.reversed());

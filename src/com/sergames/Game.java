@@ -73,7 +73,6 @@ public class Game extends JPanel {
         scheduledFuture = ses.scheduleAtFixedRate(addItems, 0, timeBetweenItems, TimeUnit.MILLISECONDS);
         System.out.println(timeBetweenItems);
         timeBetweenItems /= DIFFICULTY_RATE;
-
     }
 
     public void move() {
@@ -86,9 +85,9 @@ public class Game extends JPanel {
     }
 
     public void gameOver() {
-        JOptionPane.showMessageDialog(this, "Your score is: " + player.getScore(),
-                "Game Over", JOptionPane.YES_NO_OPTION);
-        String playerName = JOptionPane.showInputDialog("Escriu el teu nom:");
+        String msg = "<html>Your score is: " + player.getScore() + "<br>Write your name:</html>";
+        String playerName = JOptionPane.showInputDialog(this, msg, "Game Over", JOptionPane.ERROR_MESSAGE);
+        JsonManager.write(new Entry(playerName, player.getScore()));
         System.exit(ABORT);
     }
 
@@ -120,7 +119,6 @@ public class Game extends JPanel {
     }
 
     void difficulty() {
-
         if (player.getScore() != 0 && player.getScore() % POINTS_TO_INCREASE_DIFFICULTY == 0) {
             itemsGen.addDifficulty();
             restartTimer();
