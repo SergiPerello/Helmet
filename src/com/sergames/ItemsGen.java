@@ -2,7 +2,7 @@ package com.sergames;
 
 import java.util.Random;
 
-import static com.sergames.Const.SCREEN_HEIGHT;
+import static com.sergames.Const.*;
 
 public class ItemsGen {
     int[] positions = {110, 210, 310, 410, 510, 610};
@@ -26,13 +26,19 @@ public class ItemsGen {
         ItemType itemType = randomItem();
         switch (itemType) {
             case HAMMER:
-                game.items.add(new Item_Hammer(game, getRandom(positions), "/img/fallingObject-hammer.png"));
+                game.items.add(new Item_Hammer(game, getRandom(positions), IMG_HAMMER));
+                break;
+            case HEART:
+                game.items.add(new Item_Heart(game, getRandom(positions), IMG_HEART));
                 break;
             case SCREWDRIVER:
-                game.items.add(new Item_Screwdriver(game, getRandom(positions), "/img/fallingObject-screwdriver.png"));
+                game.items.add(new Item_Screwdriver(game, getRandom(positions), IMG_SCREWDRIVER));
+                break;
+            case SHIELD:
+                game.items.add(new Item_Shield(game, getRandom(positions), IMG_SHIELD));
                 break;
             case WRENCH:
-                game.items.add(new Item_Wrench(game, getRandom(positions), "/img/fallingObject-wrench.png"));
+                game.items.add(new Item_Wrench(game, getRandom(positions), IMG_WRENCH));
                 break;
         }
     }
@@ -45,5 +51,5 @@ public class ItemsGen {
         game.items.removeIf(item -> item.getY() > SCREEN_HEIGHT);
     }
 
-    enum ItemType {HAMMER, SCREWDRIVER, WRENCH}
+    enum ItemType {HAMMER, HEART, SCREWDRIVER, SHIELD, WRENCH}
 }

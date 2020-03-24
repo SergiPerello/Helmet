@@ -29,7 +29,7 @@ public abstract class Item {
     public void move() {
         if (x >= 0 && x < game.getWidth() - width) y = y + ya;
         collisionPlayer();
-        if (collisionPlayer) action();
+        if (collisionPlayer && !game.player.isImmune()) action();
 
     }
 

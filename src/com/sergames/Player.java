@@ -22,11 +22,17 @@ public class Player {
     Runnable noConfuse = () -> confused = false;
     private boolean stunned = false;
     Runnable noStun = () -> stunned = false;
+    private boolean immune = false;
+    Runnable noImmune = () -> immune = false;
     private Game game;
 
     public Player(Game game) {
         this.game = game;
         setInitialPosition();
+    }
+
+    public boolean isImmune() {
+        return immune;
     }
 
     public int getScore() {
@@ -88,6 +94,15 @@ public class Player {
     public void stun() {
         ses.schedule(noStun, PLAYER_STUN_TIME, TimeUnit.SECONDS);
         stunned = true;
+    }
+
+    public void setImmune() {
+        ses.schedule(noImmune, PLAYER_IMMUNE_TIME, TimeUnit.SECONDS);
+        immune = true;
+    }
+
+    public void heal(int healAmount) {
+        this.health += healAmount;
     }
 
     private void addScore(int points) {
