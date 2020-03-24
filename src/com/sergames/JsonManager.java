@@ -12,43 +12,54 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class JsonManager {
-    ArrayList<Entry> read() throws IOException, ParseException {
+    public static ArrayList<Entry> read() {
         JSONParser parser = new JSONParser();
-        FileReader reader = new FileReader("scores.json");
-        JSONArray jsonArray = (JSONArray) parser.parse(reader);
+        FileReader reader = null;
+        JSONArray jsonArray = null;
+        JSONObject obj = null;
         ArrayList<Entry> entries = new ArrayList<>();
         ArrayList<Entry> topEntries = new ArrayList<>();
-        JSONObject obj = null;
-
+        try {
+            reader = new FileReader("scores.json");
+            jsonArray = (JSONArray) parser.parse(reader);
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
         if (jsonArray != null) {
             for (Object o : jsonArray) {
                 obj = (JSONObject) o;
-                entries.add(new Entry(obj.get("PLAYER").toString(), Integer.parseInt(obj.get("SCORE").toString())));
+                entries.add(new Entry(obj.get("PLAYER").toString(), obj.get("SCORE").toString()));
             }
             Comparator<Entry> compareByScore = Comparator.comparing(Entry::getScore);
             entries.sort(compareByScore.reversed());
-
             if (entries.size() < 5) topEntries.addAll(entries);
-            else {
-                for (int i = 0; i < 5; i++) {
-                    topEntries.add(entries.get(i));
-                }
-            }
+            else for (int i = 0; i < 5; i++) topEntries.add(entries.get(i));
         }
         return topEntries;
     }
 
-    void write(String player, int score) throws IOException, ParseException {
+    public static void write(Entry entry) {
         JSONParser parser = new JSONParser();
-        FileReader reader = new FileReader("scores.json");
-        JSONArray jsonArray = (JSONArray) parser.parse(reader);
+        FileReader reader = null;
+        JSONArray jsonArray = null;
+        try {
+            reader = new FileReader("scores.json");
+            jsonArray = (JSONArray) parser.parse(reader);
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
         JSONObject object = new JSONObject();
-        object.put("PLAYER", player);
-        object.put("SCORE", score);
+        object.put("PLAYER", entry.getPlayer());
+        object.put("SCORE", entry.getScore());
         jsonArray.add(object);
-        FileWriter writer = new FileWriter("scores.json");
-        writer.write(jsonArray.toJSONString());
-        writer.flush();
-        writer.close();
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter("scores.json");
+            writer.write(jsonArray.toJSONString());
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

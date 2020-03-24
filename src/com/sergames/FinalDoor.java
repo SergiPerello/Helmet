@@ -11,7 +11,7 @@ public class FinalDoor {
     private int width = 100;
     private int height = 180;
     private Color color = Color.green;
-    private Main game;
+    private Game game;
     private Timer timer = new Timer("OpenCloseDoor");
     private TimerTask timerTask = new TimerTask() {
         @Override
@@ -26,13 +26,9 @@ public class FinalDoor {
         }
     };
 
-    public FinalDoor(Main game) {
+    public FinalDoor(Game game) {
         this.game = game;
         timer.scheduleAtFixedRate(timerTask, 0, 3000);
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public void paint(Graphics2D g) {

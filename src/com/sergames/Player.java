@@ -22,9 +22,9 @@ public class Player {
     Runnable noConfuse = () -> confused = false;
     private boolean stunned = false;
     Runnable noStun = () -> stunned = false;
-    private Main game;
+    private Game game;
 
-    public Player(Main game) {
+    public Player(Game game) {
         this.game = game;
         setInitialPosition();
     }
@@ -34,11 +34,8 @@ public class Player {
     }
 
     public void move() {
-        if (x + xa >= 0 && x + xa < game.getWidth() - width)
-            x = x + xa;
-        else if (x + xa >= game.getWidth() - width && !game.finalDoor.doorIsClose) {
-            x = x + xa;
-        }
+        if (x + xa >= 0 && x + xa < game.getWidth() - width) x = x + xa;
+        else if (x + xa >= game.getWidth() - width && !game.finalDoor.doorIsClose) x = x + xa;
         if (collisionFinalDoor()) {
             if (!game.finalDoor.doorIsClose) {
                 addScore(SCORE_FINAL_DOOR);
@@ -55,16 +52,12 @@ public class Player {
 
     public void keyPressed(KeyEvent e) {
         if (confused) {
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-                xa = -width;
-            if (e.getKeyCode() == KeyEvent.VK_LEFT)
-                xa = width;
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) xa = -width;
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) xa = width;
         } else {
             if (!stunned) {
-                if (e.getKeyCode() == KeyEvent.VK_LEFT)
-                    xa = -width;
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-                    xa = width;
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) xa = -width;
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) xa = width;
             }
         }
     }
@@ -90,7 +83,6 @@ public class Player {
     public void confuse() {
         ses.schedule(noConfuse, PLAYER_CONFUSE_TIME, TimeUnit.SECONDS);
         confused = true;
-
     }
 
     public void stun() {

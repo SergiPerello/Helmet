@@ -6,9 +6,9 @@ import static com.sergames.Const.SCREEN_HEIGHT;
 
 public class ItemsGen {
     int[] positions = {110, 210, 310, 410, 510, 610};
-    private Main game;
+    private Game game;
 
-    public ItemsGen(Main game) {
+    public ItemsGen(Game game) {
         this.game = game;
     }
 

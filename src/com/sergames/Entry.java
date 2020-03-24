@@ -2,9 +2,9 @@ package com.sergames;
 
 public class Entry {
     private String player;
-    private int score;
+    private String score;
 
-    public Entry(String player, int score) {
+    public Entry(String player, String score) {
         this.player = player;
         this.score = score;
     }
@@ -13,7 +13,7 @@ public class Entry {
         return player;
     }
 
-    public int getScore() {
+    public String getScore() {
         return score;
     }
 }

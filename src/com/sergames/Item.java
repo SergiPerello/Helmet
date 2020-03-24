@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class Item {
-    public Main game;
+    public Game game;
     ImageIcon imageIcon;
     private int x, y;
     private int ya = 1;
@@ -12,7 +12,7 @@ public abstract class Item {
     private int height = 80;
     private boolean collisionPlayer;
 
-    public Item(Main game, int xPosition, String img) {
+    public Item(Game game, int xPosition, String img) {
         this.game = game;
         this.x = xPosition;
         this.imageIcon = new ImageIcon(getClass().getResource(img));
