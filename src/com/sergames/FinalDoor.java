@@ -12,7 +12,7 @@ public class FinalDoor {
     private int height = 180;
     private Color color = Color.green;
     private Game game;
-    private Timer timer = new Timer("OpenCloseDoor");
+    private Timer timer = new Timer();
     private TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {

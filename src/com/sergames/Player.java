@@ -106,6 +106,7 @@ public class Player {
     }
 
     private void addScore(int points) {
+        game.difficulty();
         score += points;
     }
 

@@ -7,14 +7,15 @@ public abstract class Item {
     public Game game;
     ImageIcon imageIcon;
     private int x, y;
-    private int ya = 1;
+    private int fallingSpeed;
     private int width = 80;
     private int height = 80;
     private boolean collisionPlayer;
 
-    public Item(Game game, int xPosition, String img) {
+    public Item(Game game, int xPosition, int fallingSpeed, String img) {
         this.game = game;
         this.x = xPosition;
+        this.fallingSpeed = fallingSpeed;
         this.imageIcon = new ImageIcon(getClass().getResource(img));
     }
 
@@ -27,7 +28,7 @@ public abstract class Item {
     }
 
     public void move() {
-        if (x >= 0 && x < game.getWidth() - width) y = y + ya;
+        if (x >= 0 && x < game.getWidth() - width) y = y + fallingSpeed;
         collisionPlayer();
         if (collisionPlayer && !game.player.isImmune()) action();
 
