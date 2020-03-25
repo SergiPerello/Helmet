@@ -8,6 +8,7 @@ public class Const {
     public static final String IMG_SCREWDRIVER = "/img/screwdriver.png";
     public static final String IMG_SHIELD = "/img/shield.png";
     public static final String IMG_WRENCH = "/img/wrench.png";
+    public static final String MUSIC_URL = "/sounds/song.wav";
     public static final int SCREEN_WIDTH = 816; //800
     public static final int SCREEN_HEIGHT = 816; //800
     public static final int PLAYER_CONFUSE_TIME = 3; //seconds

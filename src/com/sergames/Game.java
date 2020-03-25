@@ -26,6 +26,7 @@ public class Game extends JPanel {
     int timeBetweenItems = TIME_BETWEEN_ITEMS;
     private JButton btnPlay = new JButton(BTN_PLAY);
     private JLabel lblTopEntries;
+    private Music music = new Music(MUSIC_URL);
 
     public Game() {
         lblTopEntries = new JLabel(DisplayTopEntries());
@@ -33,6 +34,8 @@ public class Game extends JPanel {
         btnPlay.addActionListener(actionEvent -> {
             playing = true;
             restartTimer();
+            music.start().loop(10);
+            music.setVolume(0.25);
         });
         add(btnPlay);
         add(lblTopEntries);
